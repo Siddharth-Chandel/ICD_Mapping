@@ -1,0 +1,385 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ayush Interop & FHIR - Modern Vibrant Design System */
+
+@layer base {
+  :root {
+    /* Dynamic background system */
+    --background: 220 26% 14%;
+    --background-secondary: 225 25% 18%;
+    --foreground: 210 20% 98%;
+
+    /* Card system with unique colors */
+    --card: 225 25% 18%;
+    --card-foreground: 210 20% 98%;
+    
+    --card-ingest: 142 69% 58%;
+    --card-search: 217 91% 60%;
+    --card-translate: 280 87% 47%;
+    --card-auth: 38 92% 50%;
+    --card-audit: 258 90% 66%;
+    --card-integration: 199 89% 48%;
+    --card-fhir: 142 76% 36%;
+    --card-dashboard: 158 64% 52%;
+
+    --popover: 225 25% 18%;
+    --popover-foreground: 210 20% 98%;
+
+    /* Vibrant primary system */
+    --primary: 271 81% 56%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 271 81% 50%;
+    --primary-light: 271 81% 95%;
+
+    /* Dynamic secondary */
+    --secondary: 217 91% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 217 91% 95%;
+
+    --muted: 225 25% 25%;
+    --muted-foreground: 210 20% 65%;
+
+    --accent: 280 87% 47%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 225 25% 25%;
+    --input: 225 25% 25%;
+    --ring: 271 81% 56%;
+
+    --radius: 1rem;
+
+    /* Vibrant theme colors */
+    --success: 142 69% 58%;
+    --success-foreground: 0 0% 100%;
+    --success-light: 142 69% 95%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --warning-light: 38 92% 95%;
+
+    --info: 199 89% 48%;
+    --info-foreground: 0 0% 100%;
+    --info-light: 199 89% 95%;
+
+    --purple: 280 87% 47%;
+    --purple-foreground: 0 0% 100%;
+    --purple-light: 280 87% 95%;
+
+    --pink: 330 81% 60%;
+    --pink-foreground: 0 0% 100%;
+    --pink-light: 330 81% 95%;
+
+    --orange: 25 95% 53%;
+    --orange-foreground: 0 0% 100%;
+    --orange-light: 25 95% 95%;
+
+    /* Medical coding system colors */
+    --namaste: 142 69% 58%;
+    --icd11: 217 91% 60%;
+    --snomed: 280 87% 47%;
+    --loinc: 271 81% 56%;
+
+    /* Dynamic gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(271 81% 56%) 0%, hsl(280 87% 47%) 50%, hsl(217 91% 60%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(271 81% 56%) 0%, hsl(280 87% 47%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(199 89% 48%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(142 69% 58%) 0%, hsl(158 64% 52%) 100%);
+    --gradient-warning: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(25 95% 53%) 100%);
+    --gradient-purple: linear-gradient(135deg, hsl(280 87% 47%) 0%, hsl(271 81% 56%) 100%);
+    --gradient-pink: linear-gradient(135deg, hsl(330 81% 60%) 0%, hsl(280 87% 47%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(225 25% 18%) 0%, hsl(225 25% 22%) 100%);
+    --gradient-background: radial-gradient(ellipse at top, hsl(271 81% 56% / 0.1) 0%, transparent 50%), 
+                          radial-gradient(ellipse at bottom right, hsl(217 91% 60% / 0.1) 0%, transparent 50%),
+                          hsl(220 26% 14%);
+
+    /* Enhanced shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.06);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -2px hsl(0 0% 0% / 0.05);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.1), 0 10px 10px -5px hsl(0 0% 0% / 0.04);
+    --shadow-glow: 0 0 0 1px hsl(271 81% 56% / 0.2), 0 0 30px hsl(271 81% 56% / 0.3);
+    --shadow-success: 0 0 0 1px hsl(142 69% 58% / 0.2), 0 0 20px hsl(142 69% 58% / 0.2);
+    --shadow-warning: 0 0 0 1px hsl(38 92% 50% / 0.2), 0 0 20px hsl(38 92% 50% / 0.2);
+    --shadow-purple: 0 0 0 1px hsl(280 87% 47% / 0.2), 0 0 20px hsl(280 87% 47% / 0.2);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .light {
+    --background: linear-gradient(135deg, hsl(220 60% 99%) 0%, hsl(210 100% 97%) 100%);
+    --background-secondary: hsl(210 100% 97%);
+    --foreground: 215 25% 27%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 27%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 27%;
+
+    --primary: 271 81% 56%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 271 81% 50%;
+    --primary-light: 271 81% 97%;
+
+    --secondary: 217 91% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 217 91% 97%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 280 87% 47%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 20% 90%;
+    --input: 215 20% 90%;
+    --ring: 271 81% 56%;
+
+    --gradient-background: linear-gradient(135deg, hsl(220 60% 99%) 0%, hsl(210 100% 97%) 100%);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply text-foreground font-inter antialiased;
+    background: var(--gradient-background);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    min-height: 100vh;
+  }
+
+  /* Animated background elements */
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-hero);
+    opacity: 0.1;
+    animation: pulse 8s ease-in-out infinite;
+  }
+
+  /* Medical coding system styling */
+  .medical-code {
+    @apply font-mono text-sm px-3 py-1.5 rounded-full border font-medium;
+  }
+
+  .coding-system-namaste {
+    @apply text-white border-0;
+    background: var(--gradient-success);
+    box-shadow: var(--shadow-success);
+  }
+
+  .coding-system-icd11 {
+    @apply text-white border-0;
+    background: var(--gradient-secondary);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .coding-system-snomed {
+    @apply text-white border-0;
+    background: var(--gradient-purple);
+    box-shadow: var(--shadow-purple);
+  }
+
+  .coding-system-loinc {
+    @apply text-white border-0;
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-glow);
+  }
+}
+
+@layer components {
+  /* Hero components */
+  .hero-section {
+    background: var(--gradient-hero);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, hsl(271 81% 56% / 0.3) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+  }
+
+  .hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    right: -30%;
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(circle, hsl(217 91% 60% / 0.2) 0%, transparent 70%);
+    animation: rotate -15s linear infinite;
+  }
+
+  /* Dynamic cards */
+  .card-ingest {
+    background: linear-gradient(145deg, hsl(var(--card-ingest) / 0.1) 0%, hsl(var(--card)) 100%);
+    border: 1px solid hsl(var(--card-ingest) / 0.2);
+    box-shadow: 0 8px 32px hsl(var(--card-ingest) / 0.1);
+  }
+
+  .card-search {
+    background: linear-gradient(145deg, hsl(var(--card-search) / 0.1) 0%, hsl(var(--card)) 100%);
+    border: 1px solid hsl(var(--card-search) / 0.2);
+    box-shadow: 0 8px 32px hsl(var(--card-search) / 0.1);
+  }
+
+  .card-translate {
+    background: linear-gradient(145deg, hsl(var(--card-translate) / 0.1) 0%, hsl(var(--card)) 100%);
+    border: 1px solid hsl(var(--card-translate) / 0.2);
+    box-shadow: 0 8px 32px hsl(var(--card-translate) / 0.1);
+  }
+
+  .card-auth {
+    background: linear-gradient(145deg, hsl(var(--card-auth) / 0.1) 0%, hsl(var(--card)) 100%);
+    border: 1px solid hsl(var(--card-auth) / 0.2);
+    box-shadow: 0 8px 32px hsl(var(--card-auth) / 0.1);
+  }
+
+  .card-audit {
+    background: linear-gradient(145deg, hsl(var(--card-audit) / 0.1) 0%, hsl(var(--card)) 100%);
+    border: 1px solid hsl(var(--card-audit) / 0.2);
+    box-shadow: 0 8px 32px hsl(var(--card-audit) / 0.1);
+  }
+
+  .card-integration {
+    background: linear-gradient(145deg, hsl(var(--card-integration) / 0.1) 0%, hsl(var(--card)) 100%);
+    border: 1px solid hsl(var(--card-integration) / 0.2);
+    box-shadow: 0 8px 32px hsl(var(--card-integration) / 0.1);
+  }
+
+  .card-fhir {
+    background: linear-gradient(145deg, hsl(var(--card-fhir) / 0.1) 0%, hsl(var(--card)) 100%);
+    border: 1px solid hsl(var(--card-fhir) / 0.2);
+    box-shadow: 0 8px 32px hsl(var(--card-fhir) / 0.1);
+  }
+
+  .card-dashboard {
+    background: linear-gradient(145deg, hsl(var(--card-dashboard) / 0.1) 0%, hsl(var(--card)) 100%);
+    border: 1px solid hsl(var(--card-dashboard) / 0.2);
+    box-shadow: 0 8px 32px hsl(var(--card-dashboard) / 0.1);
+  }
+
+  /* Button variants */
+  .btn-primary {
+    background: var(--gradient-primary);
+    @apply text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .btn-secondary {
+    background: var(--gradient-secondary);
+    @apply text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105;
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-success {
+    background: var(--gradient-success);
+    @apply text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105;
+    box-shadow: var(--shadow-success);
+  }
+
+  .btn-warning {
+    background: var(--gradient-warning);
+    @apply text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105;
+    box-shadow: var(--shadow-warning);
+  }
+
+  .btn-purple {
+    background: var(--gradient-purple);
+    @apply text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105;
+    box-shadow: var(--shadow-purple);
+  }
+
+  .input-field {
+    @apply border border-input bg-card/50 backdrop-blur-sm px-4 py-3 rounded-xl text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-all duration-300;
+  }
+
+  .dropdown-menu {
+    @apply absolute z-50 min-w-[8rem] overflow-hidden rounded-xl border bg-card/95 backdrop-blur-lg p-2 text-card-foreground shadow-xl;
+  }
+
+  .dropdown-item {
+    @apply relative flex cursor-pointer select-none items-center rounded-lg px-3 py-2 text-sm outline-none hover:bg-primary/10 hover:text-primary transition-colors duration-200;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 4s ease-in-out infinite alternate;
+  }
+
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes glow {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.2; }
+}

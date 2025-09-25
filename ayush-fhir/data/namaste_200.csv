@@ -1,0 +1,12 @@
+id,term,category,synonyms,icd11_tm2_code
+AY001,Arsha,Ayurvedic Disease,"Hemorrhoids,Piles,अर्श,Arsha variant",ICD-11:ME82
+AY002,Anaha,Ayurvedic Disease,"Constipation,Bloating,आनाह",ICD-11:DA74
+AY003,Vata Vyadhi,Ayurvedic Disease,"Neuromuscular disorder,Vata imbalance,वात व्याधि",ICD-11:TM2-AY999
+AY004,Raktapitta,Ayurvedic Disease,"Hematemesis,Nasal bleeding,रक्तपित्त",ICD-11:ND5A
+AY005,Prameha,Ayurvedic Disease,"Diabetes,Prameha Roga,प्रमेह",ICD-11:5A11
+AY006,Jwara,Ayurvedic Disease,"Fever,ज्वर,Jwara variant",ICD-11:1D40
+AY007,Shwasa,Ayurvedic Disease,"Asthma,Breathlessness,श्वास",ICD-11:CA23
+AY008,Atisara,Ayurvedic Disease,"Diarrhea,अतिसार",ICD-11:1A00
+AY009,Amlapitta,Ayurvedic Disease,"Dyspepsia,Sour indigestion,अम्लपित्त,Amlapitta variant","ICD-11:TM2-AY134,ICD-11:K29.7"
+AY010,Kasa,Ayurvedic Disease,"Cough,कास,Kasa variant",ICD-11:CA20
+
