@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FileText, Lock } from "lucide-react";
+import { FileText, Lock, Copy, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export const FhirProblemSection = () => {
@@ -15,6 +15,31 @@ export const FhirProblemSection = () => {
   const [isCreatingProblem, setIsCreatingProblem] = useState(false);
   const [isCheckingAccess, setIsCheckingAccess] = useState(false);
   const { toast } = useToast();
+
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+    }
+  };
+
+  const downloadText = (filename: string, text: string) => {
+    const blob = new Blob([text], { type: 'application/json;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
 
   const handleCreateProblemList = async () => {
     if (!problemCode.trim()) {
@@ -155,6 +180,17 @@ export const FhirProblemSection = () => {
                 {isCreatingProblem ? "Creating..." : "Create"}
               </Button>
             </div>
+            <div className="flex items-center justify-between mb-2">
+              <div className="text-sm font-medium text-muted-foreground">Problem List Result</div>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" onClick={() => copyToClipboard(problemResult)} disabled={!problemResult}>
+                  <Copy className="h-4 w-4 mr-1" /> Copy
+                </Button>
+                <Button variant="outline" size="sm" onClick={() => downloadText('problem-list-result.json', problemResult)} disabled={!problemResult}>
+                  <Download className="h-4 w-4 mr-1" /> Download
+                </Button>
+              </div>
+            </div>
             <pre className="bg-muted border rounded-lg p-3 text-xs overflow-auto h-64 text-muted-foreground">
               {problemResult || 'Problem list result will appear here...'}
             </pre>
@@ -191,6 +227,17 @@ export const FhirProblemSection = () => {
               >
                 {isCheckingAccess ? "Checking Access..." : "Check Access"}
               </Button>
+            </div>
+            <div className="flex items-center justify-between mb-2">
+              <div className="text-sm font-medium text-muted-foreground">Access Control Result</div>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" onClick={() => copyToClipboard(accessResult)} disabled={!accessResult}>
+                  <Copy className="h-4 w-4 mr-1" /> Copy
+                </Button>
+                <Button variant="outline" size="sm" onClick={() => downloadText('access-control-result.json', accessResult)} disabled={!accessResult}>
+                  <Download className="h-4 w-4 mr-1" /> Download
+                </Button>
+              </div>
             </div>
             <pre className="bg-muted border rounded-lg p-3 text-xs overflow-auto h-64 text-muted-foreground">
               {accessResult || 'Access control result will appear here...'}

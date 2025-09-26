@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRightLeft, Code2, Sparkles } from "lucide-react";
+import { ArrowRightLeft, Code2, Sparkles, Copy, Download } from "lucide-react";
 
 interface TranslationTarget {
   system: string;
@@ -62,6 +62,31 @@ export const ModernTranslateSection = ({ onTranslationComplete, initialQuery = "
     }
   };
 
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+    }
+  };
+
+  const downloadText = (filename: string, text: string) => {
+    const blob = new Blob([text], { type: 'application/json;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <Card className="card-translate backdrop-blur-sm border-0 shadow-purple rounded-3xl overflow-hidden">
       <CardHeader className="pb-6">
@@ -109,9 +134,19 @@ export const ModernTranslateSection = ({ onTranslationComplete, initialQuery = "
         </div>
 
         <div className="space-y-3">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
             <Code2 className="h-5 w-5 text-purple" />
             <span className="text-base font-semibold">Translation Results</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" onClick={() => copyToClipboard(JSON.stringify(translateResult, null, 2))} disabled={translateResult.length === 0}>
+                <Copy className="h-4 w-4 mr-1" /> Copy
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => downloadText(`translation-results.json`, JSON.stringify(translateResult, null, 2))} disabled={translateResult.length === 0}>
+                <Download className="h-4 w-4 mr-1" /> Download
+              </Button>
+            </div>
           </div>
           
           {translateResult.length > 0 ? (

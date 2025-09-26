@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Globe, Search } from "lucide-react";
+import { Globe, Search, Copy, Download } from "lucide-react";
 
 interface IntegrationSectionProps {
   onIntegrationComplete?: (query: string, results: any) => void;
@@ -24,6 +24,31 @@ export const IntegrationSection = ({ onIntegrationComplete, initialQuery = "" }:
       setSemanticQuery(initialQuery);
     }
   }, [initialQuery]);
+
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+    }
+  };
+
+  const downloadText = (filename: string, text: string) => {
+    const blob = new Blob([text], { type: 'application/json;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
 
   const handleWhoSearch = async () => {
     if (!whoQuery.trim()) return;
@@ -105,6 +130,17 @@ export const IntegrationSection = ({ onIntegrationComplete, initialQuery = "" }:
                 {isSearchingWho ? "Searching..." : "Search"}
               </Button>
             </div>
+            <div className="flex items-center justify-between mb-2">
+              <div className="text-sm font-medium text-muted-foreground">WHO ICD-11 Results</div>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" onClick={() => copyToClipboard(whoResult)} disabled={!whoResult}>
+                  <Copy className="h-4 w-4 mr-1" /> Copy
+                </Button>
+                <Button variant="outline" size="sm" onClick={() => downloadText('who-results.json', whoResult)} disabled={!whoResult}>
+                  <Download className="h-4 w-4 mr-1" /> Download
+                </Button>
+              </div>
+            </div>
             <pre className="bg-muted border rounded-lg p-3 text-xs overflow-auto h-48 text-muted-foreground">
               {whoResult || 'WHO ICD-11 search results will appear here...'}
             </pre>
@@ -133,6 +169,17 @@ export const IntegrationSection = ({ onIntegrationComplete, initialQuery = "" }:
               >
                 {isSearchingSemantic ? "Searching..." : "Search"}
               </Button>
+            </div>
+            <div className="flex items-center justify-between mb-2">
+              <div className="text-sm font-medium text-muted-foreground">SNOMED/LOINC Results</div>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" onClick={() => copyToClipboard(semanticResult)} disabled={!semanticResult}>
+                  <Copy className="h-4 w-4 mr-1" /> Copy
+                </Button>
+                <Button variant="outline" size="sm" onClick={() => downloadText('snomed-loinc-results.json', semanticResult)} disabled={!semanticResult}>
+                  <Download className="h-4 w-4 mr-1" /> Download
+                </Button>
+              </div>
             </div>
             <pre className="bg-muted border rounded-lg p-3 text-xs overflow-auto h-48 text-muted-foreground">
               {semanticResult || 'SNOMED CT / LOINC search results will appear here...'}

@@ -2,7 +2,7 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Search, Sparkles, Zap, Brain } from "lucide-react";
+import { Search, Sparkles, Zap, Brain, Copy, Download } from "lucide-react";
 
 interface SearchSuggestion {
   label: string;
@@ -114,6 +114,31 @@ export const ModernSearchSection = ({ onSearchComplete, initialQuery = "" }: Mod
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+    }
+  };
+
+  const downloadText = (filename: string, text: string) => {
+    const blob = new Blob([text], { type: 'application/json;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <Card className="card-search backdrop-blur-sm border-0 shadow-glow rounded-3xl overflow-hidden">
       <CardHeader className="pb-6">
@@ -194,9 +219,19 @@ export const ModernSearchSection = ({ onSearchComplete, initialQuery = "" }: Mod
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
           <div className="space-y-3">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
               <Search className="h-5 w-5 text-secondary" />
               <span className="text-base font-semibold">Search Results</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" onClick={() => copyToClipboard(searchResult)} disabled={!searchResult}>
+                  <Copy className="h-4 w-4 mr-1" /> Copy
+                </Button>
+                <Button variant="outline" size="sm" onClick={() => downloadText(`search-results.json`, searchResult)} disabled={!searchResult}>
+                  <Download className="h-4 w-4 mr-1" /> Download
+                </Button>
+              </div>
             </div>
             <div className="bg-card/50 backdrop-blur-sm border border-secondary/20 rounded-2xl p-4 h-80 overflow-auto">
               <pre className="text-xs text-muted-foreground whitespace-pre-wrap">
@@ -206,9 +241,19 @@ export const ModernSearchSection = ({ onSearchComplete, initialQuery = "" }: Mod
           </div>
           
           <div className="space-y-3">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
               <Brain className="h-5 w-5 text-primary" />
               <span className="text-base font-semibold">AI Suggestions</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" onClick={() => copyToClipboard(suggestResult)} disabled={!suggestResult}>
+                  <Copy className="h-4 w-4 mr-1" /> Copy
+                </Button>
+                <Button variant="outline" size="sm" onClick={() => downloadText(`ai-suggestions.json`, suggestResult)} disabled={!suggestResult}>
+                  <Download className="h-4 w-4 mr-1" /> Download
+                </Button>
+              </div>
             </div>
             <div className="bg-card/50 backdrop-blur-sm border border-primary/20 rounded-2xl p-4 h-80 overflow-auto">
               <pre className="text-xs text-muted-foreground whitespace-pre-wrap">
