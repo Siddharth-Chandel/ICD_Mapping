@@ -1,10 +1,10 @@
 // API Configuration
-const API_BASE_URL = 'https://schandel08-ayush-fhir.hf.space/';
+const API_BASE_URL = 'https://schandel08-ayush-fhir.hf.space';
 
 
 
 // For Hugging Face deployment, set this to your backend URL
-// Example: 'https://schandel08-ayush-fhir.hf.space/'
+// Example: 'https://schandel08-ayush-fhir.hf.space'
 export const API_CONFIG = {
   BASE_URL: API_BASE_URL,
   ENDPOINTS: {
