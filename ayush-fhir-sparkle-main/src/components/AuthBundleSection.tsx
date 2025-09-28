@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Upload } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { buildApiUrl, API_CONFIG } from "@/config/api";
 
 interface AuthBundleSectionProps {
   onAuditUpdate: () => void;
@@ -29,7 +30,7 @@ export const AuthBundleSection = ({ onAuditUpdate }: AuthBundleSectionProps) => 
 
     setIsAuthenticating(true);
     try {
-      const response = await fetch(`/auth?abha_id=${encodeURIComponent(abhaId)}`, {
+      const response = await fetch(buildApiUrl(`${API_CONFIG.ENDPOINTS.AUTH}?abha_id=${encodeURIComponent(abhaId)}`), {
         method: 'POST'
       });
       const data = await response.json();
@@ -109,7 +110,7 @@ export const AuthBundleSection = ({ onAuditUpdate }: AuthBundleSectionProps) => 
         ]
       };
 
-      const response = await fetch('/ingest-bundle', {
+      const response = await fetch(buildApiUrl(API_CONFIG.ENDPOINTS.INGEST_BUNDLE), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Search, Sparkles } from "lucide-react";
+import { buildApiUrl, API_CONFIG } from "@/config/api";
 
 interface SearchSuggestion {
   label: string;
@@ -26,12 +27,12 @@ export const SearchSection = () => {
     setIsSearching(true);
     try {
       // Search API call
-      const searchResponse = await fetch(`/search?q=${encodeURIComponent(query)}`);
+      const searchResponse = await fetch(buildApiUrl(`${API_CONFIG.ENDPOINTS.SEARCH}?q=${encodeURIComponent(query)}`));
       const searchData = await searchResponse.json();
       setSearchResult(JSON.stringify(searchData, null, 2));
 
       // Suggest API call
-      const suggestResponse = await fetch(`/suggest?q=${encodeURIComponent(query)}`);
+      const suggestResponse = await fetch(buildApiUrl(`${API_CONFIG.ENDPOINTS.SUGGEST}?q=${encodeURIComponent(query)}`));
       const suggestData = await suggestResponse.json();
       setSuggestResult(JSON.stringify(suggestData, null, 2));
     } catch (error) {
@@ -51,7 +52,7 @@ export const SearchSection = () => {
     }
 
     try {
-      const response = await fetch(`/suggest?q=${encodeURIComponent(searchQuery)}`);
+      const response = await fetch(buildApiUrl(`${API_CONFIG.ENDPOINTS.SUGGEST}?q=${encodeURIComponent(searchQuery)}`));
       const data = await response.json();
       const items = (data.suggestions || []).map((s: any) => ({
         label: s.label,

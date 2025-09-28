@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, Lock, Copy, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { buildApiUrl, API_CONFIG } from "@/config/api";
 
 export const FhirProblemSection = () => {
   const [problemCode, setProblemCode] = useState("");
@@ -64,7 +65,7 @@ export const FhirProblemSection = () => {
     setIsCreatingProblem(true);
     try {
       const response = await fetch(
-        `/fhir/problem-list?namaste_code=${encodeURIComponent(problemCode)}`,
+        buildApiUrl(`${API_CONFIG.ENDPOINTS.PROBLEM_LIST}?namaste_code=${encodeURIComponent(problemCode)}`),
         {
           method: 'POST',
           headers: {
@@ -123,7 +124,7 @@ export const FhirProblemSection = () => {
         resource_type: accessResource
       });
 
-      const response = await fetch(`/access-check?${params}`, {
+      const response = await fetch(buildApiUrl(`${API_CONFIG.ENDPOINTS.ACCESS_CHECK}?${params}`), {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

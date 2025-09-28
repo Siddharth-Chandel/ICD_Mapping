@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRightLeft, Code2, Sparkles, Copy, Download } from "lucide-react";
+import { buildApiUrl, API_CONFIG } from "@/config/api";
 
 interface TranslationTarget {
   system: string;
@@ -35,7 +36,7 @@ export const ModernTranslateSection = ({ onTranslationComplete, initialQuery = "
     setIsTranslating(true);
     try {
       const response = await fetch(
-        `/translate?code=${encodeURIComponent(code)}&system=${encodeURIComponent(system)}`
+        buildApiUrl(`${API_CONFIG.ENDPOINTS.TRANSLATE}?code=${encodeURIComponent(code)}&system=${encodeURIComponent(system)}`)
       );
       const data = await response.json();
       setTranslateResult(data.targets || []);

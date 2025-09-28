@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Globe, Search, Copy, Download } from "lucide-react";
+import { buildApiUrl, API_CONFIG } from "@/config/api";
 
 interface IntegrationSectionProps {
   onIntegrationComplete?: (query: string, results: any) => void;
@@ -55,7 +56,7 @@ export const IntegrationSection = ({ onIntegrationComplete, initialQuery = "" }:
     
     setIsSearchingWho(true);
     try {
-      const response = await fetch(`/who/tm2/search?q=${encodeURIComponent(whoQuery)}`);
+      const response = await fetch(buildApiUrl(`${API_CONFIG.ENDPOINTS.WHO_TM2}?q=${encodeURIComponent(whoQuery)}`));
       const data = await response.json();
       setWhoResult(JSON.stringify(data, null, 2));
 
@@ -77,8 +78,8 @@ export const IntegrationSection = ({ onIntegrationComplete, initialQuery = "" }:
     setIsSearchingSemantic(true);
     try {
       const [snomedResponse, loincResponse] = await Promise.all([
-        fetch(`/snomed/search?q=${encodeURIComponent(semanticQuery)}`),
-        fetch(`/loinc/search?q=${encodeURIComponent(semanticQuery)}`)
+        fetch(buildApiUrl(`${API_CONFIG.ENDPOINTS.SNOMED}?q=${encodeURIComponent(semanticQuery)}`)),
+        fetch(buildApiUrl(`${API_CONFIG.ENDPOINTS.LOINC}?q=${encodeURIComponent(semanticQuery)}`))
       ]);
       
       const snomed = await snomedResponse.json();
