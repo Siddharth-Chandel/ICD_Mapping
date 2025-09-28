@@ -18,8 +18,8 @@ class WHOICD11Client:
         self.token_url = "https://icdaccessmanagement.who.int/connect/token"
         self.access_token: Optional[str] = None
         self.token_expires: Optional[datetime] = None
-        self.cache_dir = Path("cache")
-        self.cache_dir.mkdir(exist_ok=True)
+        self.cache_dir = Path("/tmp/cache")
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
     
     async def get_access_token(self) -> str:
         """Get OAuth2 access token using client credentials"""
